@@ -1,17 +1,27 @@
 1) In your own words, explain what clean code is and why it is important.
 
+ Clean code is code that is intuitive and clear. It is written in such a way that to make it clear and able to reason about for both 
+ other developers and to yourself when reading the code six months later. It does this by following a common set of coding principles 
+ like being 'self-documenting', utilizing readable naming conventions and keeping code DRY. This helps reduce technical debt, minimize 
+ bugs, and stops your team members from hating your guts.
 
-2) Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+2) Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, 
+think about another commonly used object that relies on computers and explain what would happen if the code was not created to 
+an acceptable standard.
 
+The situation that immediately comes to my mind is the use of autopilot on commercial plane flights. There is also a lot of software 
+being used in the air traffic control towers. If the programers decided to get lazy and forgo best practices it could very easily
+result in the loss of many lives.
 
 3)Would you consider the following to be clean code? Explain why or why not. If not, refactor the code. 
 
 The code is not clean for a number of reasons.
  1) Variable names are not intuitive. The provide no clue about the purpose or meaning of the data.
  2) There are far to many comments.
- 3) The function name 'do' implies nothing about the p[urpose of the code. Not self-documenting
- 4) using hard coded numers for calculations (SET z to x * 1.8000 + 32.00) is not DRY and is not sef-documenting
+ 3) The function name 'do' implies nothing about the purpose of the code. Not self-documenting
+ 4) using hard coded numbers for calculations (SET z to x * 1.8000 + 32.00) is not DRY and is not self-documenting
  5) methods could be extracted
+
 
 My refactor would be...
 
@@ -55,5 +65,159 @@ FUNCTION calculatePercentage(sum, total)
  PRINT percentage
 END FUNCTION
 
-5) 
+5) Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
+
+a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
+
+//My code....
+FUNCTION printPaymentMessage(subTotal, discountRate, paymentType)
+  PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+END FUNCTION
+
+FUNCTION processCash(subTotal, discountRate)
+  CALL getPayment RETURNING amount
+  PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
+END FUNCTION
+
+FUNCTION processCredit(subTotal, discountRate)
+  CALL getPayment RETURNING amount
+  PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
+END FUNCTION
+
+FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
+   CALL printPaymentMessage WITH subTotal, discountRate and paymentType
+
+   IF paymentType = 'CASH' THEN
+       CALL processCash WITH subTotal and  discountRate
+   ELSE IF paymentType = 'CREDIT CARD' THEN
+       CALL processCreditCard WITH subTotal and discountRate
+   END IF
+END FUNCTION
+
+
+b. The following function checks out a book if there are no issues with the guest's account.
+
+My code....
+
+FUNCTION checkoutBook(book, guest)
+ IF guest.accountActive && NOT(guest.hasOverdueBooks) && guest.outstandingFees = 0 THEN
+           APPEND book to guest.books
+           SET book.status to "Checked Out"
+           PRINT "Your books have been issued."
+ ELSE
+     PRINT "Unable to check out book."
+ END IF
+END FUNCTION
+
+c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+My code...
+
+FUNCTION checkoutBook(book, guest)
+ IF guest.accountActive THEN
+     IF NOT(guest.hasOverdueBooks) THEN
+         IF guest.outstandingFees = 0 THEN
+           APPEND book to guest.books
+           SET book.status to "Checked Out"
+           PRINT "Your books have been issued."
+         END IF
+     END IF
+ ELSE
+     PRINT "Unable to check out book."
+ END IF
+END FUNCTION
+
+
+c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+CLASS BankAccount
+
+ FUNCTION displayBalance
+    PRINT balance
+ END FUNCTION
+
+ FUNCTION deposit(amount)
+    SET balance to balance + amount
+ END FUNCTION
+
+ FUNCTION withdraw(amount)
+     IF balance > amount THEN
+       SET balance to balance - amount
+     ELSE
+      RETURN ERROR MESSAGE
+     END
+ END FUNCTION
+
+ FUNCTION creditCardOffer
+     IF NOT(customer.hasCreditCard) THEN
+         CALL offerCreditCard
+     END
+ END FUNCTION
+
+ FUNCTION checkingAccountOffer
+     IF NOT(customer.hasCheckingAccount) THEN
+         CALL offerCheckingAccount
+     END
+ END FUNCTION
+
+ ....
+ ....
+ ....
+
+END
+
+this Class seamed pretty well organized. I only changed two things 
+ 1) "checkingAccountOffer" seamed more Self-Documenting than "checkStatus" for method name
+ 2)  withdraw() method needed some kind of 'ELSE' statement. If you have an IF you should do something with the ELSE.
+
+
+ Programming Questions
+
+ 6. Square Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect 
+ square, return the square root, otherwise return the sum.
+
+ const getPerfectSquare = (numbers)=>{
+  let sum = numbers.reduce((accumulatore,current)=>accumulatore + current);
+  const squareRoot = Math.sqrt(sum);
+
+  if(squareRoot=== Math.floor(Math.sqrt(sum))) {return squareRoot}
+  else {return sum}
+}
+
+console.log(getPerfectSquare([10,1,4,6,1,1,2])) //5
+console.log(getPerfectSquare([1,1]))  //2
+
+Repl.it  https://repl.it/@fazbat/getperfectsquare
+
+7. Duplicate. Given an array of integers, find out whether the array contains any duplicate elements. The function should 
+return true if any value appears at least twice in the array, and false if every element is distinct.
+
+const hasDuplicates = (integers)=>{
+  const setIntegers = new Set(integers);
+  return integers.length !== setIntegers.size
+}
+
+console.log(hasDuplicates([1,2,3,4,5,6,7,8,9,10])); //false
+console.log(hasDuplicates([1,2,3,4,5,5,6,7,8,9,10])); //true
+
+Repl.it https://repl.it/@fazbat/hasDuplicates
+
+
+Extra Credit
+8. Anagram An anagram is a word, phrase, or name formed by rearranging the letters of another word. For example, spar can 
+be formed from rasp. Given two strings, stringOne and stringTwo, determine if stringOne is an anagram of stringTwo. Assume 
+that the strings contain only lowercase letters and do not worry about case-sensitivity. Hint: Your first task will be to 
+convert the strings to arrays.
+
+const isAnagram=(stringOne, stringTwo)=>{
+  return stringOne.split('').sort().join('') === stringTwo.split('').sort().join('')
+}
+console.log(isAnagram("rasp","spar")); //true
+console.log(isAnagram("rake","spar")); //false
+
+Repl.it  https://repl.it/@fazbat/isAnagram
+
+
+
+
 
