@@ -114,14 +114,10 @@ c. The following class is a code snippet that should support the transactions a 
 My code...
 
 FUNCTION checkoutBook(book, guest)
- IF guest.accountActive THEN
-     IF NOT(guest.hasOverdueBooks) THEN
-         IF guest.outstandingFees = 0 THEN
+ IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND guest.outstandingFees = 0 THEN
            APPEND book to guest.books
            SET book.status to "Checked Out"
            PRINT "Your books have been issued."
-         END IF
-     END IF
  ELSE
      PRINT "Unable to check out book."
  END IF
