@@ -1,0 +1,53 @@
+__Short Answer__
+
+1) Why do programmers use pseudocode?
+
+Pseudocode is a way for programmers to brainstorm about a propblem in a language agnostic way. It allows them to reason about a problem in a purley loogical way without getting bogged down in language syntax or specific enviornmental quirks.
+
+
+2) If you run pseudocode on your computer what would happen?
+
+You would likely get an error. Pseudocode will not run on an actual machine. It is a language for aproaching problems not a programming language. Like a flow chart it sigguests an approach but does not actually impliment a solution.
+
+
+
+__Programming Assignment__
+Write the following algorithms in pseudocode:
+
+1) Create a function that takes two numbers and prints out the greater number.
+
+INPUT first number
+INPUT second number
+IF the first number is greater than the second number
+  store first number in max
+ELSE
+   store second number in max
+PRINT max
+
+2) Create a function that prints out the numbers from 1 to 100.
+
+SET number equal to 1
+WHILE the number is less than or equal to 100
+  PRINT number
+  ADD 1 to number
+END WHILE
+
+
+3) Create a function that searches for a specific entry in a phonebook.
+
+GET phonebookArray
+GET searchID
+SET item to element in phonebookArray
+WHILE item ID does not equal searchID && not at end of phonebookArray
+  IF item ID is equal to searchID
+    return item
+  ELSE
+    increment to next element in phonebookArray
+END WHILE
+return "Not Found"
+
+4) Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+I created a repl.it @  https://repl.it/@fazbat/phonebook
+  
+

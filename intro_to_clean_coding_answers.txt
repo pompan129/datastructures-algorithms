@@ -1,0 +1,59 @@
+1) In your own words, explain what clean code is and why it is important.
+
+
+2) Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+
+
+3)Would you consider the following to be clean code? Explain why or why not. If not, refactor the code. 
+
+The code is not clean for a number of reasons.
+ 1) Variable names are not intuitive. The provide no clue about the purpose or meaning of the data.
+ 2) There are far to many comments.
+ 3) The function name 'do' implies nothing about the p[urpose of the code. Not self-documenting
+ 4) using hard coded numers for calculations (SET z to x * 1.8000 + 32.00) is not DRY and is not sef-documenting
+ 5) methods could be extracted
+
+My refactor would be...
+
+FUNCTION convertToCelcius(degrees)
+ SET degrees = (degrees - 32) * (5/9) 
+ RETURN degrees
+END FUNCTION
+
+FUNCTION convertToFahrenheit(degrees)
+  SET degrees = degrees * 1.8000 + 32.00
+  RETURN degrees
+END FUNCTION
+
+FUNCTION printConvertedDegrees(degrees, type)               
+ IF type = "fahrenheit" THEN               
+   SET convertedTemperature to convertToCelcius(degrees)    
+ END IF
+                      
+ ELSE IF type  = "celsius" THEN         
+   SET convertedTemperature  to  convertToFahrenheit(degrees)
+ END IF
+ PRINT convertedTemperature  
+END FUNCTION
+
+
+4) Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+This code is much cleaner but coukld still be refactored.
+ 1) The fucntion name shouldn't be abreviated.
+ 2) The order of the operations is not intuitive.
+
+My refactor ....
+
+FUNCTION calculatePercentage(sum, total)
+ IF (total = 0) THEN
+   PRINT "Sorry, cannot divide by 0"
+ ELSE
+   SET percentage to sum / total * 100
+ END IF
+
+ PRINT percentage
+END FUNCTION
+
+5) 
+
