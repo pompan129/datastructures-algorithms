@@ -49,8 +49,8 @@ END FUNCTION
 
 4) Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
-This code is much cleaner but coukld still be refactored.
- 1) The fucntion name shouldn't be abreviated.
+This code is much cleaner but could still be refactored.
+ 1) The function name shouldn't be abbreviated.
  2) The order of the operations is not intuitive.
 
 My refactor ....
@@ -114,8 +114,8 @@ c. The following class is a code snippet that should support the transactions a 
 My code...
 
 FUNCTION checkoutBook(book, guest)
- IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND guest.outstandingFees = 0 THEN
-           APPEND book to guest.books
+ IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND guest.outstandingFees = 0 
+      APPEND book to guest.books
            SET book.status to "Checked Out"
            PRINT "Your books have been issued."
  ELSE
@@ -162,8 +162,8 @@ CLASS BankAccount
 
 END
 
-this Class seamed pretty well organized. I only changed two things 
- 1) "checkingAccountOffer" seamed more Self-Documenting than "checkStatus" for method name
+This Class seemed pretty well organized. I only changed two things 
+ 1) "checkingAccountOffer" seemed more Self-Documenting than "checkStatus" for method name
  2)  withdraw() method needed some kind of 'ELSE' statement. If you have an IF you should do something with the ELSE.
 
 
@@ -212,8 +212,6 @@ console.log(isAnagram("rasp","spar")); //true
 console.log(isAnagram("rake","spar")); //false
 
 Repl.it  https://repl.it/@fazbat/isAnagram
-
-
 
 
 
