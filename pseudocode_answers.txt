@@ -49,5 +49,43 @@ return "Not Found"
 4) Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
 
 I created a repl.it @  https://repl.it/@fazbat/phonebook
-  
+
+//Code------------------
+
+  const phoneBook = [
+  {
+    name: "Bob Johnson", number:"916-455-1234"
+  },
+  {
+    name: "Mary Berry", number:"456-897-3333"
+  },
+  {
+    name: "Tom Thumb" , number: "234-332-8879"
+  },
+  {
+    name:"Harry Smith" , number:"333-899-0005"
+  },
+  {
+    name: "Jessie Hugh", number:"666-453-8123"
+  },
+  {
+    name:"Donald Duck" , number:"987-888-4567"
+  },
+  {
+    name: "Yosemite Sam" , number:"775-123-7745"
+  },
+  {
+    name: "Bugs Bunny" , number:"284-897-3939"
+  },
+]
+
+function findByName(name){
+  for(let x=0;x<phoneBook.length;x++){
+    if(name === phoneBook[x].name){return phoneBook[x]}
+  }
+  return false
+}
+
+console.log(findByName("Harry Smith") || "not found")
+console.log(findByName("Tome Jones") || "not found")
 
