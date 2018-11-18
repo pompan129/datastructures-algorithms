@@ -1,0 +1,80 @@
+1) What is the main difference between a stack and a queue?
+
+The stack data structure implements a LIFO priority collection whereas a queue implements a FIFO collection.
+
+2) What are the similarities between stacks and queues?
+
+They are both ordered collections. They both support the addition and deletion of items though with different priorities.
+
+3) Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+I would use a Stack for both operations. For both the UNDO and REDO actions you are only interested in the latest action. Keeping track of all actions in a stack you could ‘rewind’ in reverse order. Same would be needed to REDO. You’d want access to the last undone action first.
+
+
+
+Programming Questions
+
+1)Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+const reverseString = (word)=>{
+ const stack = [];
+ for(let i=0;i<word.length; i++){
+   stack.push(word[i])
+ }
+ let reversed = "";
+ const length = stack.length;
+ for(let i=0;i<length; i++){
+   reversed += stack.pop();
+ }
+ return reversed;
+}
+
+console.log(reverseString("racecaR"));//"Racecar"
+console.log(reverseString("Bloc!"));//"!colB
+
+
+
+2) Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be removed and returned.
+
+1) Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+
+Okay, I was a little confused by these directions, but after talking to the agents on Slack I ‘think’ this is what we’re after……..
+
+class Queue {
+ constructor() {
+   this.items = [...arguments];
+ }
+
+ enqueue(item) {
+   this.items.push(item);
+ }
+
+ dequeue() {
+   return this.items.shift()
+ }
+
+ pop (){
+   const last = this.items.length-1
+   for(let i=0;i<last;i++){
+     this.enqueue(this.dequeue());
+   }
+   return this.dequeue();
+ }
+
+ getItems(){
+   return this.items;
+ }
+}
+
+let list = new Queue(1,2,3,4,5);//
+console.log(list.getItems());// [ 1, 2, 3, 4, 5 ]
+console.log(list.enqueue(99));//undefined
+console.log(list.getItems());// [ 1, 2, 3, 4, 5, 99 ]
+console.log(list.dequeue());//1
+console.log(list.pop());//99
+
+
+Repl.it  https://repl.it/@fazbat/queuebloc
