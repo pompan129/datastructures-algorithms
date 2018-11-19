@@ -1,0 +1,203 @@
+1) What are some pros and cons of using linked lists instead of arrays?
+
+Linked lists only use as much memory as needed for the number of items. They also require less effort to insert new items since you don't 
+have to allocate contiguous memory space.  Linked lists are not indexed however so find operations can take much longer and sorting is also 
+problematic.
+
+2) Come up with a real world example of a linked list.
+
+A real world metaphor might be a train. Each car is linked to the next car.  A programming example might be the stacks used when making a 
+calculator. You can add nodes one at a time for each operation or symbol. 
+
+Programming Questions
+ //all my code is in a Repl.it  https://repl.it/@fazbat/LinkedList
+
+1)The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push 
+function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional 
+implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION
+
+ANSWER:
+Bug: This would add items to beginning of list. You need to travel down the list to the end and then add node.
+My pseudo code….
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+
+IF the head node does not exist
+ SET node.next TO null;
+ SET head to node
+ELSE
+ SET current to head
+ WHILE current.next NOT = null
+    SET current to current.next
+ END WHILE
+SET current.next TO node
+SET node.next TO null;
+END IF
+END FUNCTION
+
+JS code…..
+
+class Node{
+ constructor(data){
+   this.data = data;
+   this.next = null;
+ }
+}
+
+class LinkedList{
+constructor(){
+  this.head = null;
+}
+
+push(data){
+  const node = new Node(data)
+  if(this.head === null){this.head = node;}
+  else{
+    let current = this.head;
+    while(current.next !== null){
+      current = current.next
+    }
+    current.next = node;
+  }
+}
+}
+
+ 2) Given an unsorted singly linked list, remove all duplicates from the linked list.
+
+//using hash 
+//pseudoCode….
+FUNCTION removeDuplicates(list, head)
+ IF head = null OR head.next = NULL RETURN
+ SET hash to NEW HASHTABLE
+ PUSH head.data INTO hash
+ SET previous to head
+ SET current = head.next;
+ WHILE current NOT = null 
+   IF hash CONTAINS current.data
+     SET previous.next to current.next
+     SET current to previous.next
+   ELSE
+    PUSH current.data INTO hash
+    SET previous to current
+    SET current to current.next
+   END IF
+ END WHILE
+END FUNCTION
+
+//My code….
+deleteDuplicates(){
+   if(this.head === null || this.head.next === null){return}
+   const hash = {};
+   let previous = this.head;
+   hash[previous.data] = true;
+   let current = previous.next;
+   while(current !== null){
+     if(hash[current.data]){
+       previous.next = current.next;
+       current = previous.next;
+     }else{
+       hash[current.data] = true;
+       previous = current;
+       current = current.next
+     }
+   }
+ }
+
+//no hash
+//pseudo code
+FUNCTION removeDuplicates2(list, head)
+  IF head = null OR head.next = NULL RETURN
+  SET original to head
+  WHILE original.next NOT = null
+    SET previous to original
+    SET test to previous.next
+    WHILE test NOT = null
+      IF test.data = original.data
+        SET previous.next TO test.next
+        SET test TO previous.next
+      ELSE
+        SET previous TO test
+        SET test TO previous.next
+      END IF
+    END WHILE
+    SET original to original.next
+  END WHILE
+END FUNCTION
+
+//my code…
+deleteDuplicates_2(){     //no hash
+   if(this.head === null || this.head.next === null){return}
+   let original = this.head;
+   while(original !== null){
+     let previous = original;
+     let test = previous.next;
+     while(test !== null){
+       if(test.data === original.data){
+         previous.next = test.next;
+         test = previous.next;
+       }else{
+         previous = test;
+         test = previous.next
+       }
+     }
+     original = original.next
+   }
+ }
+
+
+2) Given an unsorted singly linked list, reverse it.
+
+//pseudocode
+FUNCTION reverse()
+  IF head = null OR head.next = NULL RETURN
+  SET newHead to null
+  SET node to head
+  WHILE node NOT = null
+    SET temp TO node.next
+    SET node.next TO newHead
+    SET newHead to node
+    SET node TO temp
+  END WHILE
+  SET head to newHead
+END FUNCTION
+
+//My code…
+reverse(){
+   if(this.head === null || this.head.next === null){return}
+   let temp = null;
+   let newHead = null;
+   let node = this.head;
+  
+   while(node !== null){
+     temp = node.next;
+     node.next = newHead;
+     newHead = node;
+     node = temp;
+   }
+   this.head = newHead;
+ }
+
+
+
+//ALL CODE CAN BE FOUND ON Repl.it   https://repl.it/@fazbat/LinkedList
+
+ 
+        
+
+      
+
