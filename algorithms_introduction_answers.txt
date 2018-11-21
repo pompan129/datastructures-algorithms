@@ -1,0 +1,57 @@
+1.  Using proper pseudo-code, describe the following primitive algorithms:
+
+    Making coffee:
+        GET coffee from the cupboard
+        EMPTY basket in coffee pot of any previous grounds
+        RINSE basket and coffee pot
+        PLACE new filter in basket
+        GRIND coffee beans (if needed)
+        POUR coffee grounds into filter/basket
+        PUT basket into coffee maker
+        FILL coffee maker with water
+        PLACE pot under basket.
+        TURN ON coffee maker
+
+    Washing dishes:
+        PLACE dirty dishes in sink
+        COVER dishes with hot water
+        ADD soap to water
+        GET sponge
+        WHILE (dirty dishes still in sink)
+            SCRUB dirty dish with sponge
+            RINSE dirty dish with clean water
+            PLACE dirty dish in drying rack
+        END WHILE
+
+    Make a Smoothie:
+        TAKE frozen fruit out of freezer
+        PLACE fruit into blender
+        ADD juice, milk, or water to blender
+        ADD protein powder/fiber to blender
+        TURN ON blender
+        TURN OFF blender when ingredients are thoroughly mixed
+        POUR mixture into glass
+
+2.	As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a
+situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a 
+tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what
+ about each of your cases make them stand out?
+
+    NETFLIX: found a better way to utilize the mail system and then streaming services to deliver video content to the consumer.
+    You don’t see any Blockbusters around anymore.
+
+    CHIPOTLE: pioneered the idea of “fast casual” dining. They deliver healthier choices of high quality food with only a 
+    marginal markup above traditional fast food. The algorithm they use to assemble the food allows them to focus on a finite 
+    number of food choices and deliverer them in a highly efficient way.
+
+    AMAZON: this is the elephant in any room. Amazon is poised to take over the world partly do to its many efficient algorithms 
+    throughout the organization. One of the most impressive (and somewhat controversial) is it’s algorithm for package delivery. 
+    Amazon is able to delivery packages in a very timely manner with it’s efficient warehouse algorithms and delivery system. Some
+     choices are  delivered in a matter of hours.
+
+3.	Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+    An efficient algorithm is one that delivers the expected results and the least amount of time and utilizing the fewest resources. 
+    It is also a bonus of the algorithm is easy to implement and reason about. That way the learning curve is manageable and so is 
+    maintenance. 
+
