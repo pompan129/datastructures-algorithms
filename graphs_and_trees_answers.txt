@@ -1,0 +1,118 @@
+1) What is a binary tree and what makes it unique to other trees?
+    A Binary Tree is a tree structure with one head node and the set of branch nodes.  Each node in the tree will have up to two child nodes, 
+    a ‘left’ and a ‘right’ node. Nodes at the bottom of the tree with no children are called leafs. There are many kinds of trees that may 
+    have more children per node or even less. Technically a linked list is a tree. It’s just a tree in which each node has only one child 
+    (like a trunk I guess). A Binary tree, by definition, is a tree in which each node has up to two children and is directed (there is a 
+    natural flow from the head down to the leafs).
+    
+2) What is a heuristic?
+    A heuristic is a guess or rather an algorithm used to find an approximate answer to a complex problem.  So far computer scientists 
+    haven’t found a more efficient way of slaving the ‘traveling salesman’ problem other than brute force solutions. Such solutions do 
+    not scale well and require far to many resources and to much time. So programmers use a heuristic instead to find an answer that is 
+    ‘close enough’ but may not consistently be the optimal solution. This heuristic would be a far more efficient method for finding a 
+    problem but would sacrifice accuracy.
+    
+3) What is another problem besides the shortest-path problem that requires the use of heuristics?
+    Have you ever played chess against a computer? The game is far to complex for the computer figure out all of the possible outcomes.
+
+        “No complete solution for chess in either of the two senses is known, nor is it expected that chess will be solved in the near future. 
+        There is disagreement on whether the current exponential growth of computing power will continue long enough to someday allow for 
+        solving it by "brute force", i.e. by checking all possibilities.”  - wikipedia
+
+    So, instead the computer chess games use a heuristic for determining the approximate ‘score’ of a board state and what might be the next 
+    optimal move.
+
+4) What is the difference between a depth-first search and a breadth-first search?
+    When dealing with trees a DFS will search to the end of a branch until it encounters a leaf node with no children and then back up 
+    one level and proceed down the alternate left or right branch. By contrast a BFS will check each level of the tree and then proceed 
+    down the various branches. BFS will check all the immediate children of the head node and then all the immediate children of the head 
+    nodes immediate children and so on and so on. DFS would find the deepest grandchild of the head node following the left or right 
+    branches first. 
+
+5) Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+    An undirected graph is one in which the nodes are connected to each other in both direction. Node A knows about Node B and Node B knows 
+    about Node A as well. An a-cyclic graph is does not form a loop. A search of the graph will not lead back to the starting point. I the 
+    graph is unweighted it means that each edge, or connection between nodes, has the same value pr cost. Or, rather, that there is no cost 
+    associated with traveling from one node to another.
+
+6) What kind of graph is a binary search tree?
+    A binary search tree is an directed, unweighted, a-cyclic graph.
+
+
+PROGRAMMING QUESTIONS:
+
+1) Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+code @ https://repl.it/@fazbat/binaryTree
+
+FUNCTION findValue(value,root)
+  SET temp to root
+  WHILE temp exists
+   IF temp.value = value RETURN true
+   ELSE IF value is LESS than temp.value 
+      SET temp to temp.left
+   ELSE SET temp to temp.right
+   END IF
+  END WHILE
+  RETURN false
+END FUNCTION
+
+has(value){
+   let temp = this.head;
+   while(temp !== null){
+     if(temp.value === value) {return true;}
+     temp = temp.value > value? temp.left:temp.right;
+   }
+   return false;
+ }
+
+
+2) Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+code @ https://repl.it/@fazbat/binaryTree
+
+FUNCTION distanceFromRoot(root,value)
+  IF root.value = value RETURN 0
+  IF root.value > value RETURN 1 + distanceFromRoot(root.left,value);
+  IF root.value < value RETURN 1 + distanceFromRoot(root.right,value);
+END FUNCTION
+
+
+FUNCTION distanceBetweenNodes(root, valueA, valueB)
+   IF valueA is GREATER THAN valueB SWAP valueA with valueB
+   IF valueA AND valueB are both LESS THAN root.value
+     RETURN distanceBetweenNodes(root.left, valueA, valueB)
+   ELSE IF valueA AND valueB are both GREATER THAN root.value
+     RETURN distanceBetweenNodes(root.right, valueA, valueB)
+   ELSE IF valueA is LESS THAN  root.value AND valueB is GREATER THAN root.value
+     RETURN distanceFromRoot(root, valueA) + distanceFromRoot(root,valueB)
+END FUNCTION
+
+distanceFromRoot(value, root = this.head,){
+   if(root.value === value){ return 0;}
+   if(root.value > value) {
+     return 1 + this.distanceFromRoot(value,root.left);}
+   if (root.value < value){ 
+     return 1 + this.distanceFromRoot(value, root.right);}
+}
+
+distanceBetweenNodes(valueA, valueB, root = this.head) {
+   if (valueA > valueB) { [valueA, valueB] = [valueB, valueA] }
+
+   if (valueA < root.value && valueB < root.value) {
+     return this.distanceBetweenNodes(valueA, valueB, root.left)
+   }
+   if (valueA > root.value && valueB > root.value) {
+     return this.distanceBetweenNodes(valueA, valueB, root.right)
+   }
+   else if (valueA <= root.value && valueB >= root.value) {
+     return this.distanceFromRoot(valueA, root) + this.distanceFromRoot(valueB, root)
+   }
+ }
+
+
+
+
+
+
+
