@@ -1,0 +1,82 @@
+1) Define and compare recursion and iteration.
+
+Recursion is when a procedure (i.e., a function) calls itself. The process can be an elegant way to solve many problems in computer science. 
+It can also be easier to reason about an implement than iterative solutions in many cases. But it does come with some drawbacks. Recursive 
+solutions tend to be slower and less efficient. They run the risk of a stack overflow if base cases are not rigorously implemented.  
+
+Iteration is the process of repeating steps in a ‘loop’. In principle it is always possible to remove recursion and replace it with 
+iteration. Iteration tends to be faster and more efficient than recursion but the logic is not always as easy to follow or impliment. 
+
+2) Name five algorithms that are commonly implemented by recursion.
+	Towers of Hanoi, Mergesort, Quicksort, Depth First Search, Binary Search
+
+3) When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+Recursion makes sense when the structure of the problem naturally lends itself to a combination of sub-results starting with known 
+cases because that is precisely what it handles. The Factorial problem is really multiplying a number by all it’s lower Factorials.  
+Mergesort is just sorting all the sub-arrays (all the way down to a single item) and then combining them. These sorts of problems 
+lend themselves to recursion. 
+
+Iteration is great at running straight through a data set.  Finding the Minimum or Maximum number in a set requires one pass and would 
+best be solved by a loop. You may also want to use iteration, even if it is more difficult to implement, if system resources or speed are 
+a great concern.
+
+4) Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). 
+What is similar, and what is different?
+
+Factorial:
+Solving the Factorial problem with the recursive method actually takes fewer lines of code and iis a bit easier to reason about. Both 
+iteration and recursion fail with negative numbers as they should. Both solutions presented also travel from the largest number down 
+to 2 although with recursion the multiplying of the lowest numbers finishes first. 
+
+Maximum:
+In this case the iterative solution is actually cleaner and far more efficient. When iterating you simply compare each element once with 
+the previous element and replace the currentMaximum variable accordingly. The recursive method call itself against the remainder or the 
+array each time requiring a lot of complicated array manipulation or reasoning. Both methods would return immediately if the array were 
+either of length 0 (an error) or length 1 (max is only element). 
+
+Fibonacci:
+In both the iterative and recursive form of this algorithm we return one if we are looking for the first or second Fibonacci number. After 
+this in the iterative form we keep track of the two numbers to add in variables: one for the previous number and the other the current 
+number.  When the loop finishes, we return current since it holds the latest calculated number. The recursive method is less efficient and 
+makes multiple recursive calls based on the previous two numbers in the sequence. The logic is easy to see in the recursive Fibonacci method 
+but the number of operations grows exponentially as the numbers get larger.
+
+5) Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the 
+number of items in the entire collection.
+
+function getDeepCount(collection){
+  let count = collection.length;
+  collection.forEach(item=>{
+    if(Array.isArray(item)){
+      count += getDeepCount(item) - 1;
+    }
+  })
+  return count;
+}
+
+let test = [1,2,3,'a','r', [2,3,4,5], 'foo', [1,['f','o','o',[true,false,true]],3]];
+getDeepCount(test);//18
+
+6) A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+function isPalindrome(word, start=0,end){
+  word = word.toLowerCase();
+  end = end === undefined? word.length -1: end;
+
+  if(start >= end){return true}
+  if(word[start] === word[end]){return isPalindrome(word,++start,--end)}
+  return false;
+}
+
+console.log(
+isPalindrome('abccba'),//true
+isPalindrome('bug'),//false
+isPalindrome('racecar'),//true
+isPalindrome('RACEcar'),//true
+)
+
+7) Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior 
+exhibits properties of recursion.
+
+Your search result rsults in a link to the very same search results which conrains a link to the very same search results etc…. 
+This behavior is reminiscent of a function calling itself.
