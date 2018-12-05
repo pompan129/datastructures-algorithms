@@ -1,0 +1,90 @@
+1) What is a real-life scenario that uses linear search?
+
+Linear search can be used where list contains random data. Some examples might be asking everyone in a line at the airport if 
+they are the ones who own a lost bag or wallet. Or maybe you go down a list of reservations at a restaurant to see if a particular 
+name is on the list. 
+
+2) What is a real-life scenario that uses binary search?
+
+Binary search only works with sorted data.  Real life scenario might be looking up a word in the dictionary. Or  name in the 
+phone book.
+
+3) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using 
+linear search?
+
+It would take seven iterations
+
+4) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using 
+binary search?
+
+It would take three iterations
+
+5) Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? 
+Explain your reasoning.
+
+I would use a linear search. Binary search does not work on unsorted data.
+
+6) Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search?
+Explain your reasoning.
+
+I would use binary search.  It would take at most Log base 2 iterations in the worst case. A linear search might take a 
+million iterations.
+
+
+
+Programming Assignment:
+
+1) You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a 
+program to allow you to win the bet.
+
+repl.it @ https://repl.it/@fazbat/binarySearchDictionary
+
+const binarysearch = (word, dictionary) => {
+  let low = 0;
+  let high = dictionary.length - 1;
+
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2);
+    if (dictionary[mid].toLowerCase() > word.toLowerCase()) {
+      high = mid - 1;
+    }
+    else if  (dictionary[mid].toLowerCase() < word.toLowerCase()){
+      low = mid + 1;
+    }
+    else{return mid}
+  }
+
+  return false;
+}
+
+const dictionary = ("ajar ,akin ,a la carte ,a la mode ,alarm ,alarm clock ,alarmed ,alarming ,alarmingly ,alarmist ,alas ,"+
+"Albatross ,albeit ,albino ,album ,alcohol ,alcoholic ,alcoholism ,alcove ,alderman ,alderwoman ,ale").split(' ,');
+
+let index = binarysearch("Albatross" , dictionary)
+console.log(index); // 11
+console.log(dictionary[index]);//Albatross
+
+
+2) You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a 
+program that will help you net the right fish.
+
+repl.it @ https://repl.it/@fazbat/getFish
+
+const tank = ["black","red","black","black","black","black","black","black","red","black","black","black","black","black","black",
+"black","black","black","black","black","black","black","black","black","black","black","black","red","black","white","black",
+"black","black","black","black","black","black","red","black","black","black","black","red","black","black","black","black",
+"black","black","black"]
+
+const getSpottedFish = (color,tank)=>{
+  for(let i = 0; i<tank.length;i++){
+    if(tank[i]===color){return `${color} spotted fish in net ${i}`}
+  }
+    return "Sorry, there are no fish with that coloring."
+}
+
+console.log(getSpottedFish('white', tank));//white spotted fish in net 29
+console.log(getSpottedFish('purple', tank));//Sorry, there are no fish with that coloring.
+
+
+
+
