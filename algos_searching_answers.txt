@@ -58,7 +58,7 @@ const binarysearch = (word, dictionary) => {
 }
 
 const dictionary = ("ajar ,akin ,a la carte ,a la mode ,alarm ,alarm clock ,alarmed ,alarming ,alarmingly ,alarmist ,alas ,"+
-"Albatross ,albeit ,albino ,album ,alcohol ,alcoholic ,alcoholism ,alcove ,alderman ,alderwoman ,ale").split(' ,');
+"Albatross ,albeit ,albino ,album ,alcohol ,alcoholic ,alcoholism ,alcove ,alderman ,alderwoman").split(' ,');
 
 let index = binarysearch("Albatross" , dictionary)
 console.log(index); // 11
