@@ -1,0 +1,82 @@
+1) Write pseudocode for bubble sort.
+
+ FUNCTION bubbleSort(collection)
+ SET swapped to true
+ SET passes to 1
+   WHILE swapped is TRUE
+     SET swapped to false
+     FOR i = FIRST INDEX of collection to LAST INDEX of collection - passes
+       IF collection[i] > collection[i + 1] THEN
+         SET tmp to collection[i]
+         SET collection[i] to collection[i + 1]
+         SET collection[i + 1] to tmp
+         SET swapped to true
+       END IF
+     END FOR
+     SET passes to passes  + 1
+   END WHILE
+   RETURN collection
+ END FUNCTION
+
+2) Write pseudocode for quicksort.
+
+Quicksort method in checkpoint is a little different than what other resources say. I chose this pseudocode instead.
+Hope that is ok. 
+
+FUNCTION partition(array, left, right, pivot)
+   SET rightIndex = right - 1
+   SET leftIndex = left
+   SET partitioned = false
+
+   WHILE NOT partitioned
+      WHILE array[leftIndex] < pivot
+         SET leftIndex = leftIndex + 1           
+      end WHILE
+
+      WHILE array[rightIndex] > pivot AND right > 0
+         SET right = right - 1           
+      end WHILE
+
+      IF rightIndex >= rightIndex
+         partitioned = true
+      ELSE                
+         SWAP array[leftIndex],array[rightIndex]
+      END IF
+   END WHILE 
+	
+   SWAP leftIndex,right
+   return leftIndex
+END FUNCTION
+
+FUNCTION quickSort(left, right, array)
+
+   IF right-left <= 0
+      RETURN
+   ELSE     
+      SET pivot = array[right]
+      SET mid = partition(array,left, right, pivot)
+      quickSort(left,mid-1,array)
+      quickSort(mid+1,right,array)    
+   END IF		
+   
+END FUNCTION
+	
+
+3)We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. 
+After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more 
+efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+Quicksort and Mergesort are both devide and conquer algorithms. They allow for a few number of swap and comparison 
+operations on average. Although quicksort could be just as bad as bubbleSort if the array was in the exact opposite 
+order. Mergesort would do only n log(n) number of operations even in the worst case but it requires a little more 
+space (memory). By dividing the sorts into ever smaller prtions of the array the divide and conquer algorithms avoid 
+the reassing of elements in the collection like bubblesort does.
+
+4)All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how 
+it works. What is the ideal input for bucket sort?
+
+Bucket sort  is a sorting algorithm that works by distributing the items of a collection into a number of buckets. 
+Each bucket is then sorted individually using a different sorting algorithm or by recursively using bucket sort 
+again. The sorted buckets are then combined to a sorted collection. This sort works best when the data is uniformly 
+disributed. This allows for the maximum number of reltively same size buckets. Bucket sort does worst when all the 
+items wind up in one large bucket.
